@@ -3,7 +3,6 @@ import 'flatpickr/dist/flatpickr.min.css';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
 document.body.style.backgroundColor = '#afeb54';
-const TIMER_DELAY = 1000;
 let intervalId = null;
 let selectedDate = null;
 let currentDate = null;
@@ -61,6 +60,8 @@ function onDateCheck(selectedDates) {
 }
 
 function timerStart() {
+  refs.btnStartTimer.disabled = true;
+      refs.dateInput.disabled = true;
   intervalId = setInterval(() => {
     currentDate = new Date().getTime();
     if (selectedDate - currentDate <= 1000) {
@@ -74,13 +75,11 @@ function timerStart() {
       );
       return;
     } else {
-      refs.btnStartTimer.disabled = true;
-      refs.dateInput.disabled = true;
       currentDate += 1000;
       remainingTime = Math.floor(selectedDate - currentDate);
       convertMs(remainingTime);
     }
-  }, TIMER_DELAY);
+  }, 1000);
 }
 
 function createMarkup({ days, hours, minutes, seconds }) {
