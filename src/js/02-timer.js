@@ -10,7 +10,7 @@ let currentDate = null;
 
 const refs = {
   dateInput: document.querySelector('input#datetime-picker'),
-  btnStartTimer: document.querySelector('button[data-start-timer]'),
+  btnStartTimer: document.querySelector('[data-start]'),
   daysRemaining: document.querySelector('[data-days]'),
   hoursRemaining: document.querySelector('[data-hours]'),
   minutesRemaining: document.querySelector('[data-minutes]'),
@@ -48,14 +48,14 @@ function onDateCheck(selectedDates) {
     refs.btnStartTimer.disabled = false;
     Report.success(
       '🥰 Congratulation! Click on start!',
-      '"Do not try to become a person of success but try to become a person of value." <br/><br/>- Albert Einstein',
+      '"Success does not consist in never making mistakes but in never making the same one a second time." <br/><br/>- Bernard Shaw',
       'Okay'
     );
     return;
   }
   Report.failure(
     '🥺 Ooops...',
-    'Please, choose a date in the future and remember: "Knowledge rests not upon truth alone, but upon error also." - Carl Gustav Jung',
+    '"Your time is limited, so don’t waste it living someone else’s life." - Steve Jobs',
     'Okay'
   );
 }
