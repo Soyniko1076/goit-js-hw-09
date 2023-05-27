@@ -9,12 +9,12 @@ const refs = {
 }
 
 refs.body.style.backgroundColor = '#99cbe0';
-refs.form.addEventListener('click', onPromiseCreate);
+refs.form.addEventListener('submit', onPromiseCreate);
 
 
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
-    const shouldResolve = Math.random() > 0.3;
+    const shouldResolve = Math.random() > 0.5;
     setTimeout(() => {
       if (shouldResolve) {
         resolve({ position, delay });
@@ -28,19 +28,20 @@ function createPromise(position, delay) {
 function onPromiseCreate(e) {
   e.preventDefault();
 
-  let valueDelay = Number(refs.delay.value);
+  const valueDelay = Number(refs.delay.value);
   let step = Number(refs.step.value);
   let amount = Number(refs.amount.value);
 
-  for (let i = 1; i <= amount; i += 1) {
+  for (let i = 0; i < amount; i += 1) {
+
     let promiseDelay = valueDelay + step * i;
 
     createPromise(i, promiseDelay)
       .then(({ position, delay }) => {
-        Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        Notify.success(`✅ Fulfilled promise ${position + 1} in ${delay}ms`);
       })
       .catch(({ position, delay }) => {
-        Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+        Notify.failure(`❌ Rejected promise ${position + 1} in ${delay}ms`);
       });
   }
 }
